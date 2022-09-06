@@ -31,8 +31,6 @@ pImgs.forEach((pImg) => {
     });
 });
 
-resetButton.addEventListener( 'click', resetGame())
-
 
 function playRound(playerSelection, computerSelection) {
     if (playerSelection !== computerSelection && computerSelection === choices[1] && playerSelection === choices[0]) {
