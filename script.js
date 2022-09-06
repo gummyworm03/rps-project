@@ -2,8 +2,8 @@ const winner = document.querySelector('.winner');
 const pScore = document.querySelector(".playerScore");
 const cScore = document.querySelector(".computerScore");
 const ties = document.querySelector('.ties');
-const pChoice = document.querySelector(".playerChoice");
-const cChoice = document.querySelector(".computerChoice");
+let pChoice = document.querySelector(".playerChoice");
+let cChoice = document.querySelector(".computerChoice");
 const resetButton = document.querySelector(".reset");
 const choices = ['rock', 'paper', 'scissors'];
 
@@ -24,9 +24,14 @@ pImgs.forEach((pImg) => {
         computerSelection = getComputerChoice();
         playRound(pImg.id, computerSelection);
         updateWinner();
+        pChoice.innerText = `You chose ${pImg.id}`;
+        cChoice.innerText = `The computer chose ${computerSelection}`;
+        declareWinner();
         console.log('1', computerSelection, '2', pImg.id)
     });
 });
+
+resetButton.addEventListener( 'click', resetGame())
 
 
 function playRound(playerSelection, computerSelection) {
@@ -61,4 +66,29 @@ function updateWinner() {
     ties.innerText = `Ties: ${numTies}`;
 };
 
+function declareWinner() {
+    if (playerScore == 5) {
+        winner.style.color = "red";
+        winner.innerText = "Congrats, you won the game!";
+        resetButton.style.display = "flex";
+    }
+    if (computerScore == 5) {
+        winner.style.color = "red";
+        winner.innerText = "Sorry, the computer won this game :(";
+        resetButton.style.display = "flex";
+    }
+};
+
+function resetGame() {
+    winner.innerText = "";
+    pScore.innerText = "Score: 0";
+    cScore.innerText = "Score: 0";
+    ties.innerText = "Ties: 0";
+    resetButton.style.display = "none";
+    pChoice = "";
+    cChoice = "";
+    playerScore = 0;
+    computerScore = 0;
+    winner.style.color = "black";
+}
 
